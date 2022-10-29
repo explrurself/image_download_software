@@ -1,5 +1,9 @@
 const imageDownloader = require("node-image-downloader");
 const jimp = require("jimp");
+const path = require("path");
+const fs = require("fs");
+const upload_dir = path.dirname(require.main.filename) + "/downloads";
+
 
 let hashed_array = [];
 
@@ -27,7 +31,17 @@ let hashed_array = [];
 // };
 
 const image_downloader = async (links_array, res) => {
+console.log(upload_dir)
+
   try {
+    if (!fs.existsSync(upload_dir )) {
+      fs.mkdir(path.join(upload_dir), (err) => {
+        if (err) {
+          return console.error(err);
+        }
+        console.log("Directory created successfully!");
+      });
+    }
     let img_path_array = [];
     for (const url of links_array) {
       await imageDownloader({
