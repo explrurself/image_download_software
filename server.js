@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 const https = require("https");
 const routes = require('./Constants/routes');
+const cors = require('cors')
 
 app.use(express.json());
 app.use(
@@ -27,8 +28,14 @@ if (process.env.ENVIRONMENT === "Production") {
 
 if (process.env.ENVIRONMENT === "Development") {
   var http = require("http").createServer(app);
+  cors={
+    options: "*",
+    optionsSuccessStatus: 200
+  }
+
   http.listen(PORT, () => {
     console.log("*******************************************");
     console.log(`port is listening on ${PORT}`);
   });
+
 }
