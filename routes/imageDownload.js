@@ -4,8 +4,9 @@ const cheerio = require("cheerio");
 const fs = require("fs");
 const request = require("request");
 const image_downloader = require("./services");
+const cors = require('cors')
 
-router.post("/", async (req, res) => {
+router.post("/", cors(), async (req, res) => {
   try {
     console.log("api hit sucessfully");
     const domain = req.body.domain;
